@@ -14,6 +14,9 @@ export interface HomeBudgetInput {
   has_kitchen: boolean;
   has_bedroom: boolean;
   additional_requirements?: string;
+  image_base64?: string;
+  room_photo_name?: string;
+  design_vibe?: string;
 }
 
 export interface PartyBudgetInput {
@@ -65,12 +68,35 @@ export interface CalculationTableRow {
   percentage_of_budget: number;
 }
 
+export interface RoomAnalysis {
+  detected_room_type?: string;
+  current_spatial_features?: string;
+  lighting_assessment?: string;
+  wall_and_flooring?: string;
+  curated_color_palette?: string[];
+  styling_direction?: string;
+}
+
+export interface GeneratedVisualConcept {
+  id: string;
+  title: string;
+  tag: string;
+  room_type: string;
+  image_url: string;
+  description: string;
+  transformation_notes: string[];
+  integrated_products: string[];
+}
+
 export interface HomeBudgetResult {
   total_budget: number;
   remaining_budget: number;
   budget_breakdown: BudgetCategory[];
   calculation_table?: CalculationTableRow[];
   additional_suggestions: string[];
+  room_analysis?: RoomAnalysis;
+  uploaded_room_image?: string;
+  generated_visual_concepts?: GeneratedVisualConcept[];
 }
 
 export interface PartyBudgetResult {
