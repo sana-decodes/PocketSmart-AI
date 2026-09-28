@@ -1,0 +1,6 @@
+{
+  "name": "PocketSmart AI - Budget Planning & Smart Recommendation System",
+  "description": "AI-powered budget planning and personalized recommendations for Home Interiors, Party Planning, and Jewelry with Indian e-commerce integrations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
