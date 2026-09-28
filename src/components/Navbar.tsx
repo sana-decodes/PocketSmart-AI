@@ -27,8 +27,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2 cursor-pointer group"
             onClick={() => onNavigate('landing')}
           >
-            <span className="font-extrabold text-xl tracking-tight text-[#F8FAFC] group-hover:text-purple-300 transition-colors">
-              Pocket<span className="text-[#A78BFA]">Smart</span> <span className="text-xs text-[#38BDF8] font-bold tracking-wide">AI</span>
+            <span className="font-black text-xl tracking-tight bg-gradient-to-r from-blue-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
+              PocketSmart AI
             </span>
           </div>
 
@@ -60,8 +60,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onNavigate('home-planner')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'home-planner'
-                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+                  ? 'bg-[#1E293B] text-blue-400 border border-blue-500/40 shadow-xs font-bold'
+                  : 'text-[#94A3B8] hover:text-blue-300 hover:bg-[#1E293B]/60'
               }`}
             >
               Home Decor
@@ -71,8 +71,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onNavigate('party-planner')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'party-planner'
-                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+                  ? 'bg-[#1E293B] text-pink-400 border border-pink-500/40 shadow-xs font-bold'
+                  : 'text-[#94A3B8] hover:text-pink-300 hover:bg-[#1E293B]/60'
               }`}
             >
               Party & Events
@@ -82,8 +82,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onNavigate('jewelry-planner')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'jewelry-planner'
-                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
-                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+                  ? 'bg-[#1E293B] text-cyan-400 border border-cyan-500/40 shadow-xs font-bold'
+                  : 'text-[#94A3B8] hover:text-cyan-300 hover:bg-[#1E293B]/60'
               }`}
             >
               Jewelry
@@ -178,19 +178,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
           <button
             onClick={() => onNavigate('home-planner')}
-            className={`py-1 px-2 font-medium ${currentPage === 'home-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
+            className={`py-1 px-2 font-medium ${currentPage === 'home-planner' ? 'text-blue-400 font-bold' : 'text-[#94A3B8]'}`}
           >
             Decor
           </button>
           <button
             onClick={() => onNavigate('party-planner')}
-            className={`py-1 px-2 font-medium ${currentPage === 'party-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
+            className={`py-1 px-2 font-medium ${currentPage === 'party-planner' ? 'text-pink-400 font-bold' : 'text-[#94A3B8]'}`}
           >
             Party
           </button>
           <button
             onClick={() => onNavigate('jewelry-planner')}
-            className={`py-1 px-2 font-medium ${currentPage === 'jewelry-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
+            className={`py-1 px-2 font-medium ${currentPage === 'jewelry-planner' ? 'text-cyan-400 font-bold' : 'text-[#94A3B8]'}`}
           >
             Jewelry
           </button>
