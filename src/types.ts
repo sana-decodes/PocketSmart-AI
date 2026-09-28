@@ -113,3 +113,17 @@ export interface HistoryItem {
   summary: string;
   fullResult?: any;
 }
+
+export type CurrencyCode = 'INR' | 'USD' | 'EUR' | 'GBP';
+
+export interface SavedPocketItem {
+  id: string;
+  name: string;
+  category: string;
+  source: 'home' | 'party' | 'jewelry';
+  price: number;
+  shoppingLinks?: Record<string, string>;
+  notes?: string;
+  addedAt: string;
+}
+

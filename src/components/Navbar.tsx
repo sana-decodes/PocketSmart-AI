@@ -1,6 +1,7 @@
 import React from 'react';
-import { Home, Sparkles, PartyPopper, Gem, History, LogOut, User as UserIcon, LogIn, LayoutDashboard } from 'lucide-react';
-import { User } from '../types';
+import { LogOut, LogIn, ShoppingBag } from 'lucide-react';
+import { User, CurrencyCode } from '../types';
+import { usePocket } from '../context/PocketContext';
 
 interface NavbarProps {
   currentPage: string;
@@ -15,117 +16,134 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentUser,
   onLogout,
 }) => {
+  const { currency, setCurrency, savedItems, setIsBasketOpen } = usePocket();
+
   return (
-    <header className="bg-slate-900 text-white sticky top-0 z-50 shadow-md border-b border-slate-800">
+    <header className="bg-[#0F172A] text-[#F8FAFC] sticky top-0 z-40 shadow-md border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand Logo */}
+          {/* Zone 1: Single text element wordmark */}
           <div
-            className="flex items-center gap-3 cursor-pointer group"
-            onClick={() => onNavigate(currentUser ? 'dashboard' : 'landing')}
+            className="flex items-center gap-2 cursor-pointer group"
+            onClick={() => onNavigate('landing')}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-amber-400 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-amber-400" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-white">
-                  Pocket<span className="text-amber-400">Smart</span>
-                </span>
-                <span className="bg-amber-400/20 text-amber-300 text-[10px] font-bold px-1.5 py-0.5 rounded border border-amber-400/30 uppercase tracking-wider">
-                  AI
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400 hidden sm:block font-medium">
-                AI Budget Planning & Smart Recommendations
-              </p>
-            </div>
+            <span className="font-extrabold text-xl tracking-tight text-[#F8FAFC] group-hover:text-purple-300 transition-colors">
+              Pocket<span className="text-[#A78BFA]">Smart</span> <span className="text-xs text-[#38BDF8] font-bold tracking-wide">AI</span>
+            </span>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            {currentUser && (
-              <button
-                onClick={() => onNavigate('dashboard')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  currentPage === 'dashboard'
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <LayoutDashboard className="w-4 h-4 text-blue-400" />
-                <span>Dashboard</span>
-              </button>
-            )}
+          {/* Zone 2: 4-6 clean text navigation links */}
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5">
+            <button
+              onClick={() => onNavigate('landing')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                currentPage === 'landing'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+              }`}
+            >
+              Overview
+            </button>
+
+            <button
+              onClick={() => onNavigate('dashboard')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                currentPage === 'dashboard'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+              }`}
+            >
+              Dashboard
+            </button>
 
             <button
               onClick={() => onNavigate('home-planner')}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'home-planner'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
               }`}
             >
-              <Home className="w-4 h-4 text-emerald-400" />
-              <span>Home Planner</span>
+              Home Decor
             </button>
 
             <button
               onClick={() => onNavigate('party-planner')}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'party-planner'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
               }`}
             >
-              <PartyPopper className="w-4 h-4 text-orange-400" />
-              <span>Party Planner</span>
+              Party & Events
             </button>
 
             <button
               onClick={() => onNavigate('jewelry-planner')}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 currentPage === 'jewelry-planner'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
               }`}
             >
-              <Gem className="w-4 h-4 text-pink-400" />
-              <span>Jewelry Planner</span>
+              Jewelry
             </button>
 
-            {currentUser && (
-              <button
-                onClick={() => onNavigate('history')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  currentPage === 'history'
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
-                }`}
-              >
-                <History className="w-4 h-4 text-indigo-400" />
-                <span>History</span>
-              </button>
-            )}
+            <button
+              onClick={() => onNavigate('history')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                currentPage === 'history'
+                  ? 'bg-[#1E293B] text-[#A78BFA] border border-purple-500/20 shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B]/60'
+              }`}
+            >
+              History
+            </button>
           </nav>
 
-          {/* User Auth Controls */}
-          <div className="flex items-center gap-3">
+          {/* Zone 3: Action Controls */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Currency Selector */}
+            <div className="flex items-center bg-[#1E293B] rounded-lg p-0.5 border border-slate-700/80">
+              {(['INR', 'USD', 'EUR'] as CurrencyCode[]).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCurrency(c)}
+                  className={`px-2 py-0.5 text-[11px] font-bold rounded-md transition-all ${
+                    currency === c
+                      ? 'bg-[#7C3AED] text-[#F8FAFC] shadow-xs'
+                      : 'text-[#94A3B8] hover:text-[#F8FAFC]'
+                  }`}
+                  title={`Switch to ${c}`}
+                >
+                  {c === 'INR' ? '₹' : c === 'USD' ? '$' : '€'}
+                </button>
+              ))}
+            </div>
+
+            {/* Pocket Basket Toggle */}
+            <button
+              onClick={() => setIsBasketOpen(true)}
+              className="relative p-2 rounded-lg bg-[#1E293B] hover:bg-slate-700/60 text-[#94A3B8] hover:text-[#F8FAFC] border border-slate-700/80 transition-colors flex items-center gap-1.5"
+              title="Open Pocket Basket"
+            >
+              <ShoppingBag className="w-4 h-4 text-[#A78BFA]" />
+              {savedItems.length > 0 && (
+                <span className="w-4 h-4 rounded-full bg-[#7C3AED] text-[#F8FAFC] text-[10px] font-black flex items-center justify-center shadow-xs">
+                  {savedItems.length}
+                </span>
+              )}
+            </button>
+
+            {/* User Auth Controls */}
             {currentUser ? (
-              <div className="flex items-center gap-3">
-                <div className="hidden sm:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold uppercase">
-                    {currentUser.username[0]}
-                  </div>
-                  <span className="text-xs font-semibold text-slate-200">
-                    {currentUser.username}
-                  </span>
-                </div>
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline text-xs font-semibold text-[#94A3B8]">
+                  {currentUser.username}
+                </span>
                 <button
                   onClick={onLogout}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-red-400 bg-slate-800 hover:bg-slate-700/80 rounded-lg border border-slate-700 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#EF4444] bg-[#1E293B] hover:bg-slate-800 rounded-lg border border-slate-700/80 transition-colors"
                   title="Logout"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -133,74 +151,55 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => onNavigate('login')}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span>Sign In</span>
-                </button>
-                <button
-                  onClick={() => onNavigate('register')}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-slate-900 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-sm transition-colors"
-                >
-                  <span>Get Started</span>
-                </button>
-              </div>
+              <button
+                onClick={() => onNavigate('login')}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-[#F8FAFC] bg-[#7C3AED] hover:bg-[#8B5CF6] rounded-lg shadow-md shadow-purple-600/20 transition-all active:scale-95"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Sign In</span>
+              </button>
             )}
           </div>
         </div>
 
-        {/* Mobile Navigation bar */}
+        {/* Mobile Navigation Bar */}
         <div className="md:hidden flex items-center justify-around py-2 border-t border-slate-800 text-xs">
           <button
-            onClick={() => onNavigate(currentUser ? 'dashboard' : 'landing')}
-            className={`flex flex-col items-center py-1 px-2 rounded ${
-              currentPage === 'dashboard' || currentPage === 'landing' ? 'text-amber-400 font-bold' : 'text-slate-400'
-            }`}
+            onClick={() => onNavigate('landing')}
+            className={`py-1 px-2 font-medium ${currentPage === 'landing' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
           >
-            <LayoutDashboard className="w-4 h-4 mb-0.5" />
-            <span>Home</span>
+            Overview
+          </button>
+          <button
+            onClick={() => onNavigate('dashboard')}
+            className={`py-1 px-2 font-medium ${currentPage === 'dashboard' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
+          >
+            Dashboard
           </button>
           <button
             onClick={() => onNavigate('home-planner')}
-            className={`flex flex-col items-center py-1 px-2 rounded ${
-              currentPage === 'home-planner' ? 'text-amber-400 font-bold' : 'text-slate-400'
-            }`}
+            className={`py-1 px-2 font-medium ${currentPage === 'home-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
           >
-            <Home className="w-4 h-4 mb-0.5" />
-            <span>Decor</span>
+            Decor
           </button>
           <button
             onClick={() => onNavigate('party-planner')}
-            className={`flex flex-col items-center py-1 px-2 rounded ${
-              currentPage === 'party-planner' ? 'text-amber-400 font-bold' : 'text-slate-400'
-            }`}
+            className={`py-1 px-2 font-medium ${currentPage === 'party-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
           >
-            <PartyPopper className="w-4 h-4 mb-0.5" />
-            <span>Party</span>
+            Party
           </button>
           <button
             onClick={() => onNavigate('jewelry-planner')}
-            className={`flex flex-col items-center py-1 px-2 rounded ${
-              currentPage === 'jewelry-planner' ? 'text-amber-400 font-bold' : 'text-slate-400'
-            }`}
+            className={`py-1 px-2 font-medium ${currentPage === 'jewelry-planner' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
           >
-            <Gem className="w-4 h-4 mb-0.5" />
-            <span>Jewelry</span>
+            Jewelry
           </button>
-          {currentUser && (
-            <button
-              onClick={() => onNavigate('history')}
-              className={`flex flex-col items-center py-1 px-2 rounded ${
-                currentPage === 'history' ? 'text-amber-400 font-bold' : 'text-slate-400'
-              }`}
-            >
-              <History className="w-4 h-4 mb-0.5" />
-              <span>History</span>
-            </button>
-          )}
+          <button
+            onClick={() => onNavigate('history')}
+            className={`py-1 px-2 font-medium ${currentPage === 'history' ? 'text-[#A78BFA]' : 'text-[#94A3B8]'}`}
+          >
+            History
+          </button>
         </div>
       </div>
     </header>
