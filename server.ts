@@ -860,7 +860,7 @@ Ensure all costs stay strictly within the budget. Return ONLY the JSON object.
   }
 
   // Concept 3: Modern Dining & Accent Space Makeover
-  if (diningTables > 0 || has_kitchen || visualConcepts.length < 3) {
+  if (Number(num_dining_tables) > 0 || has_kitchen || visualConcepts.length < 3) {
     visualConcepts.push({
       id: 'concept-dining',
       title: 'Modern Dining Space & Lighting Makeover',
