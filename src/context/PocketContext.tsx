@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { CurrencyCode, SavedPocketItem } from '../types';
+import { CurrencyCode, SavedPocketItem, ThemeMode } from '../types';
 
 interface PocketContextType {
   currency: CurrencyCode;
   setCurrency: (curr: CurrencyCode) => void;
   formatPrice: (amountInINR: number) => string;
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
+  toggleTheme: () => void;
   savedItems: SavedPocketItem[];
   addItem: (item: Omit<SavedPocketItem, 'id' | 'addedAt'>) => void;
   removeItem: (id: string) => void;
@@ -29,6 +32,15 @@ export const PocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     return (localStorage.getItem('pocketsmart_currency') as CurrencyCode) || 'INR';
   });
 
+  const [theme, setThemeState] = useState<ThemeMode>(() => {
+    const saved = localStorage.getItem('pocketsmart_theme') as ThemeMode | null;
+    if (saved === 'light' || saved === 'dark') return saved;
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    return 'dark';
+  });
+
   const [savedItems, setSavedItems] = useState<SavedPocketItem[]>(() => {
     try {
       const stored = localStorage.getItem('pocketsmart_basket');
@@ -43,6 +55,28 @@ export const PocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   useEffect(() => {
     localStorage.setItem('pocketsmart_currency', currency);
   }, [currency]);
+
+  useEffect(() => {
+    localStorage.setItem('pocketsmart_theme', theme);
+    const root = document.documentElement;
+    if (theme === 'light') {
+      root.classList.add('light');
+      root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+    } else {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      root.setAttribute('data-theme', 'dark');
+    }
+  }, [theme]);
+
+  const setTheme = (t: ThemeMode) => {
+    setThemeState(t);
+  };
+
+  const toggleTheme = () => {
+    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   useEffect(() => {
     localStorage.setItem('pocketsmart_basket', JSON.stringify(savedItems));
@@ -97,6 +131,9 @@ export const PocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         currency,
         setCurrency,
         formatPrice,
+        theme,
+        setTheme,
+        toggleTheme,
         savedItems,
         addItem,
         removeItem,

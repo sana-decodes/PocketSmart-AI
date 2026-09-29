@@ -141,6 +141,7 @@ export interface HistoryItem {
 }
 
 export type CurrencyCode = 'INR' | 'USD' | 'EUR' | 'GBP';
+export type ThemeMode = 'dark' | 'light';
 
 export interface SavedPocketItem {
   id: string;

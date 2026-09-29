@@ -1,9 +1,156 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  :root.light,
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+
   body {
     background-color: #0F172A;
     color: #F8FAFC;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.light body,
+  [data-theme="light"] body {
+    background-color: #F8FAFC;
+    color: #0F172A;
   }
 }
+
+/* Light Mode Overrides */
+html.light .bg-\[\#0F172A\],
+[data-theme="light"] .bg-\[\#0F172A\] {
+  background-color: #F8FAFC !important;
+}
+
+html.light header.bg-\[\#0F172A\],
+[data-theme="light"] header.bg-\[\#0F172A\] {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+html.light footer.bg-\[\#0F172A\],
+[data-theme="light"] footer.bg-\[\#0F172A\] {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+}
+
+html.light .bg-\[\#1E293B\],
+[data-theme="light"] .bg-\[\#1E293B\] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06) !important;
+}
+
+/* Inner containers and inputs that use #0F172A inside cards */
+html.light .bg-\[\#1E293B\] .bg-\[\#0F172A\],
+[data-theme="light"] .bg-\[\#1E293B\] .bg-\[\#0F172A\] {
+  background-color: #F8FAFC !important;
+}
+
+html.light input.bg-\[\#0F172A\],
+html.light select.bg-\[\#0F172A\],
+html.light textarea.bg-\[\#0F172A\],
+[data-theme="light"] input.bg-\[\#0F172A\],
+[data-theme="light"] select.bg-\[\#0F172A\],
+[data-theme="light"] textarea.bg-\[\#0F172A\] {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder,
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Text color adaptations */
+html.light .text-\[\#F8FAFC\],
+[data-theme="light"] .text-\[\#F8FAFC\] {
+  color: #0F172A !important;
+}
+
+html.light .text-\[\#94A3B8\],
+[data-theme="light"] .text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+html.light .text-slate-400,
+html.light .text-slate-500,
+[data-theme="light"] .text-slate-400,
+[data-theme="light"] .text-slate-500 {
+  color: #64748B !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-800\/80,
+html.light .border-slate-700,
+html.light .border-slate-700\/80,
+[data-theme="light"] .border-slate-800,
+[data-theme="light"] .border-slate-800\/80,
+[data-theme="light"] .border-slate-700,
+[data-theme="light"] .border-slate-700\/80 {
+  border-color: #E2E8F0 !important;
+}
+
+html.light .divide-slate-800 > :not([hidden]) ~ :not([hidden]),
+[data-theme="light"] .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #E2E8F0 !important;
+}
+
+html.light .hover\:bg-slate-800\/40:hover,
+html.light .hover\:bg-slate-800:hover,
+html.light .hover\:bg-slate-700\/60:hover,
+[data-theme="light"] .hover\:bg-slate-800\/40:hover,
+[data-theme="light"] .hover\:bg-slate-800:hover,
+[data-theme="light"] .hover\:bg-slate-700\/60:hover {
+  background-color: #F1F5F9 !important;
+}
+
+/* Light mode table headers */
+html.light thead.bg-\[\#0F172A\],
+[data-theme="light"] thead.bg-\[\#0F172A\] {
+  background-color: #F1F5F9 !important;
+  color: #475569 !important;
+}
+
+/* Subtle highlights in light mode */
+html.light .bg-purple-950\/20,
+[data-theme="light"] .bg-purple-950\/20 {
+  background-color: #F5F3FF !important;
+  border-color: #DDD6FE !important;
+}
+
+html.light .bg-pink-950\/20,
+[data-theme="light"] .bg-pink-950\/20 {
+  background-color: #FDF2F8 !important;
+  border-color: #FBCFE8 !important;
+}
+
+html.light .bg-cyan-950\/20,
+[data-theme="light"] .bg-cyan-950\/20 {
+  background-color: #ECFEFF !important;
+  border-color: #BAE6FD !important;
+}
+
+html.light .text-\[\#A78BFA\],
+[data-theme="light"] .text-\[\#A78BFA\] {
+  color: #7C3AED !important;
+}
+
+/* Modals and drawers */
+html.light .bg-black\/80,
+html.light .bg-black\/85,
+[data-theme="light"] .bg-black\/80,
+[data-theme="light"] .bg-black\/85 {
+  background-color: rgb(15 23 42 / 0.5) !important;
+}
+

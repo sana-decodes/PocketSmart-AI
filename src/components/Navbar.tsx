@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogOut, LogIn, ShoppingBag } from 'lucide-react';
+import { LogOut, LogIn, ShoppingBag, Sun, Moon } from 'lucide-react';
 import { User, CurrencyCode } from '../types';
 import { usePocket } from '../context/PocketContext';
 
@@ -16,7 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentUser,
   onLogout,
 }) => {
-  const { currency, setCurrency, savedItems, setIsBasketOpen } = usePocket();
+  const { currency, setCurrency, theme, toggleTheme, savedItems, setIsBasketOpen } = usePocket();
 
   return (
     <header className="bg-[#0F172A] text-[#F8FAFC] sticky top-0 z-40 shadow-md border-b border-slate-800/80">
@@ -120,6 +120,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               ))}
             </div>
+
+            {/* Theme Toggle (Light / Dark) */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-[#1E293B] hover:bg-slate-700/60 text-[#94A3B8] hover:text-[#F8FAFC] border border-slate-700/80 transition-all flex items-center justify-center cursor-pointer group"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label="Toggle theme mode"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform duration-300" />
+              ) : (
+                <Moon className="w-4 h-4 text-purple-500 group-hover:-rotate-12 transition-transform duration-300" />
+              )}
+            </button>
 
             {/* Pocket Basket Toggle */}
             <button
